@@ -1,7 +1,5 @@
 # Gestor de Tanques PWA-GRUPO-13-TP2
 
-Aplicación web desarrollada con React y Tailwind que permite visualizar, buscar y filtrar información sobre distintos tipos de tanques, con una interfaz dinámica y responsive.
-
 ## Objetivo
 
 El objetivo del proyecto es desarrollar una SPA (Single Page Application) utilizando React y Tailwind. La aplicación consumirá datos desde una API simulada e incluirá navegación entre distintas páginas, sistema de búsqueda, soporte para idiomas en español e inglés, y persistencia de las preferencias del usuario.
@@ -17,8 +15,8 @@ El objetivo del proyecto es desarrollar una SPA (Single Page Application) utiliz
 
 ## Descripción de la Aplicación
 
-El Gestor de Tanques permite a los usuarios navegar entre páginas, realizar busquedas, elegir preferencia de idiomas y favoritos.
-. La aplicación ofrece funcionalidades de:
+La aplicación ofrece funcionalidades de:
+
 * **Visualización:** Listado dinámico de cada tipo de Tanque con tarjetas detalladas.
 * **Filtros:** Filtros de busqueda según la preferencia del usuario
 * **Busqueda:** Sistema de búsqueda para encontrar Tanques específicos de manera rápida.
