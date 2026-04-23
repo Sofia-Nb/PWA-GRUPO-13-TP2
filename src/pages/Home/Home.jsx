@@ -1,11 +1,49 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Routes } from "../../const/routes";
 import { useNavigate } from "react-router-dom";
 import  Select  from "../../components/Select/Select";
 import Titulo from "../../components/Titulo/Titulo";
+import TankItemCard from "../../components/TankItemCard/TankItemCard";
+import { GetTanques } from "../../const/tanques"
 
 export const Home = () => {
   const navigation = useNavigate();
+  const [tanques, setTanques] = useState([]);
+  const [page, setPage ] = useState(1); 
+  const [loading, setLoading] = useState(false); 
+  const [more, setMore] = useState(true);
+  const divRef = useRef(null);
+
+  useEffect (() => {
+    const cargarTanques = async () => {
+      setLoading(true);
+      try {
+        const data = await GetTanques(page, 3);
+        if (data.length === 0) {
+          setMore(false); 
+        } else {
+          setTanques(prev => [...prev, ...data]); 
+        }
+      } catch (error) {
+        console.error("Error al cargar tanques:", error);
+      } finally {
+        setLoading(false); 
+      }
+    }
+    cargarTanques();
+  }, [page]); 
+
+ useEffect(() => {
+    if (!more) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !loading) {
+        setPage(prev => prev + 1);
+      }
+    });
+    if (divRef.current) observer.observe(divRef.current);
+    return () => observer.disconnect();
+  }, [loading, more]); 
 
   return (
     <>
@@ -20,7 +58,6 @@ export const Home = () => {
           navigation(Routes.details);
         }}> DETALLES
       </button>
-
       <Select
       opciones={[
         { label: "Opción 1", value: "opcion1" },
@@ -30,8 +67,22 @@ export const Home = () => {
       onChange={(e) => {
         console.log("Seleccionaste:", e.target.value);
       }}
-    />
-    
+        />
+        <div className="grid lg:grid-cols-3 gap-6 p-6">
+          {tanques.map(tanque => (
+            <Link to={`/details/${tanque.idTanque}`}>
+            <TankItemCard
+            nombre={tanque.nombre}
+            tipo={tanque.tipo}
+            descripcion={tanque.descripcion}
+            imagen={tanque.imagen}
+          />
+          </Link>
+          ))}
+        </div>
+        {loading && <p className="text-center p-4">Cargando...</p>}
+        {!more && <p className="text-center p-4 text-gray-400">No hay más tanques</p>}
+      <div ref={divRef} className="h-4"/>
     </>
   );
 };
