@@ -1,0 +1,19 @@
+{
+  "spanish": "Spanish",
+  "english": "English",
+  "home": {
+    "title": "Welcome to Home",
+    "detalles": "DETAILS",
+    "favoritos": "FAVORITES"
+  },
+  "details": {
+    "title": "Welcome to Details",
+    "home": "HOME",
+    "favoritos": "FAVORITES"
+  },
+  "favorites": {
+    "title": "Welcome to your Favorites",
+    "home": "HOME",
+    "detalles": "DETAILS"
+  }
+}
