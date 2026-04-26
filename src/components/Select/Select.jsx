@@ -1,6 +1,7 @@
-const Select = ({ opciones, onChange }) => {
+const Select = ({ opciones, onChange, value }) => {
     return (
-        <select className= "w-48 sm:w-56 px-3 py-2 border border-gray-300 rounded-md text-center" onChange={onChange}>
+        <select className= "w-48 sm:w-56 px-3 py-2 border border-gray-300 rounded-md text-center" onChange={onChange}
+        value={value}>
             {opciones.map((opcion, index) => (
                 <option key={index} value={opcion.value}>
                     {opcion.label}
