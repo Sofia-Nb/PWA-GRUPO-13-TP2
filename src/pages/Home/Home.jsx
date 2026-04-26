@@ -2,20 +2,23 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Routes } from "../../const/routes";
 import { useNavigate } from "react-router-dom";
-import  Select  from "../../components/Select/Select";
+import { useTranslation } from "react-i18next"; 
+import Select from "../../components/Select/Select";
 import Titulo from "../../components/Titulo/Titulo";
+import { LenguajeSelect } from "../../components/LenguajeSelect/LenguajeSelect";
 import TankItemCard from "../../components/TankItemCard/TankItemCard";
-import { GetTanques } from "../../const/tanques"
+import { GetTanques } from "../../const/tanques";
 
 export const Home = () => {
   const navigation = useNavigate();
+  const { t } = useTranslation();
   const [tanques, setTanques] = useState([]);
-  const [page, setPage ] = useState(1); 
+  const [page, setPage] = useState(1); 
   const [loading, setLoading] = useState(false); 
   const [more, setMore] = useState(true);
   const divRef = useRef(null);
 
-  useEffect (() => {
+  useEffect(() => {
     const cargarTanques = async () => {
       setLoading(true);
       try {
@@ -30,11 +33,11 @@ export const Home = () => {
       } finally {
         setLoading(false); 
       }
-    }
+    };
     cargarTanques();
   }, [page]); 
 
- useEffect(() => {
+  useEffect(() => {
     if (!more) return;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !loading) {
@@ -47,41 +50,48 @@ export const Home = () => {
 
   return (
     <>
-      <Titulo texto="Bienvenido al Home" />
-      <button className= "font-bold py-2 px-4 rounded"
+      <LenguajeSelect />
+      <Titulo texto={t("home.title")} />
+      
+      <button className="font-bold py-2 px-4 rounded"
         onClick={() => {
           navigation(Routes.favorites);
-        }}> FAVORITOS
+        }}> {t("home.favoritos")}
       </button>
+      
       <button className="font-bold py-2 px-4 rounded"
         onClick={() => {
           navigation(Routes.details);
-        }}> DETALLES
+        }}> {t("home.detalles")}
       </button>
+
       <Select
-      opciones={[
-        { label: "Opción 1", value: "opcion1" },
-        { label: "Opción 2", value: "opcion2" },
-        { label: "Opción 3", value: "opcion3" },
-      ]}
-      onChange={(e) => {
-        console.log("Seleccionaste:", e.target.value);
-      }}
-        />
-        <div className="grid lg:grid-cols-3 gap-6 p-6">
-          {tanques.map(tanque => (
-            <Link to={`/details/${tanque.idTanque}`}>
+        opciones={[
+          { label: "Opción 1", value: "opcion1" },
+          { label: "Opción 2", value: "opcion2" },
+          { label: "Opción 3", value: "opcion3" },
+        ]}
+        onChange={(e) => {
+          console.log("Seleccionaste:", e.target.value);
+        }}
+      />
+
+      <div className="grid lg:grid-cols-3 gap-6 p-6">
+        {tanques.map(tanque => (
+          <Link key={tanque.idTanque} to={`/details/${tanque.idTanque}`}>
             <TankItemCard
-            nombre={tanque.nombre}
-            tipo={tanque.tipo}
-            descripcion={tanque.descripcion}
-            imagen={tanque.imagen}
-          />
+              nombre={tanque.nombre}
+              tipo={tanque.tipo}
+              descripcion={tanque.descripcion}
+              imagen={tanque.imagen}
+            />
           </Link>
-          ))}
-        </div>
-        {loading && <p className="text-center p-4">Cargando...</p>}
-        {!more && <p className="text-center p-4 text-gray-400">No hay más tanques</p>}
+        ))}
+      </div>
+
+      {loading && <p className="text-center p-4">{t("common.loading") || "Cargando..."}</p>}
+      {!more && <p className="text-center p-4 text-gray-400">{t("home.no_more") || "No hay más tanques"}</p>}
+      
       <div ref={divRef} className="h-4"/>
     </>
   );

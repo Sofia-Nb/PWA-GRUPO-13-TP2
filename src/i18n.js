@@ -1,21 +1,26 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+import es from "./locales/es/translation.json"
+import en from "./locales/en/translation.json"
+const savedLanguage = localStorage.getItem("language") ||  "es";
+
 i18n.use(initReactI18next).init({
-  resources: {
-    es: {
-      translation: {
-        "titulo": "Mis ...",
-      }
-    },
-    en: {
-      translation: {
-        "titulo": "My ...",
-      }
-    }
+ resources: {
+  es: {
+    translation: es
   },
-  lng: "es",
-  fallbackLng: "en",
+  en: {
+    translation: en
+  }
+},
+
+  lng: savedLanguage,
+  fallbackLng: "es",
+  supportedLngs: ["es","en"],
+  interpolation:{
+    escapeValue:false,
+  },
 });
 
 export default i18n;
