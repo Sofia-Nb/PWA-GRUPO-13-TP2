@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next"; // De main
 import Titulo from "../../components/Titulo/Titulo";
 import { LenguajeSelect } from "../../components/LenguajeSelect/LenguajeSelect"; // De main
 import { GetTanqueById } from "../../const/tanques";
+import { generarPDF } from "../../utils/generarPdf/generarPdf";
 
 const Details = () => {
   const navigation = useNavigate();
@@ -46,6 +47,15 @@ const Details = () => {
         <h2 className="text-2xl font-bold mb-2">{tanque?.nombre}</h2>
         <p className="text-blue-500 text-sm font-semibold uppercase mb-2">{tanque?.tipo}</p>
         <p className="text-gray-600">{tanque?.descripcion}</p>
+        <button className="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded cursor-pointer"
+        onClick={() =>
+          generarPDF(
+            tanque?.nombre,
+            tanque?.tipo,
+            tanque?.descripcion,
+            tanque?.imagen
+          )}> Descargar PDF
+          </button>
       </div>
     </>
   );
