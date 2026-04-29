@@ -4,7 +4,12 @@
     "home": {
         "title": "Bienvenido al Home",
         "detalles": "DETALLES",
-        "favoritos": "FAVORITOS"
+        "favoritos": "FAVORITOS",
+        "no_more": "No hay mas resultados.",
+        "no_results": "No se encontraron tanques"
+    },
+    "common" : {
+        "loading": "Cargando..."
     },
     "details":{
         "title": "Bienvenido a Detalles",
