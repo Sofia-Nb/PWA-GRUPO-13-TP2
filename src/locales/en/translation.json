@@ -15,5 +15,8 @@
     "title": "Welcome to your Favorites",
     "home": "HOME",
     "detalles": "DETAILS"
+  },
+  "header": {
+    "title": "Tipo de Tanques"
   }
 }

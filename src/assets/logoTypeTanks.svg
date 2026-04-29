@@ -1,0 +1,16 @@
+<svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title {
+      font-family: 'Arial Black', sans-serif;
+      font-size: 36px;
+      fill: #ffffff;
+      letter-spacing: 2px;
+    }
+    .accent {
+      fill: #d4af37;
+    }
+  </style>
+
+  <text x="10" y="35" class="title">TYPE</text>
+  <text x="10" y="70" class="title accent">TANKS</text>
+</svg>

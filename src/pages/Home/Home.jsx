@@ -8,6 +8,8 @@ import Titulo from "../../components/Titulo/Titulo";
 import { LenguajeSelect } from "../../components/LenguajeSelect/LenguajeSelect";
 import TankItemCard from "../../components/TankItemCard/TankItemCard";
 import { GetTanques } from "../../const/tanques";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 export const Home = () => {
   const navigation = useNavigate();
@@ -50,32 +52,8 @@ export const Home = () => {
 
   return (
     <>
-      <LenguajeSelect />
-      <Titulo texto={t("home.title")} />
+      <Header></Header>
       
-      <button className="font-bold py-2 px-4 rounded"
-        onClick={() => {
-          navigation(Routes.favorites);
-        }}> {t("home.favoritos")}
-      </button>
-      
-      <button className="font-bold py-2 px-4 rounded"
-        onClick={() => {
-          navigation(Routes.details);
-        }}> {t("home.detalles")}
-      </button>
-
-      <Select
-        opciones={[
-          { label: "Opción 1", value: "opcion1" },
-          { label: "Opción 2", value: "opcion2" },
-          { label: "Opción 3", value: "opcion3" },
-        ]}
-        onChange={(e) => {
-          console.log("Seleccionaste:", e.target.value);
-        }}
-      />
-
       <div className="grid lg:grid-cols-3 gap-6 p-6">
         {tanques.map(tanque => (
           <Link key={tanque.idTanque} to={`/details/${tanque.idTanque}`}>
@@ -93,7 +71,9 @@ export const Home = () => {
       {!more && <p className="text-center p-4 text-gray-400">{t("home.no_more") || "No hay más tanques"}</p>}
       
       <div ref={divRef} className="h-4"/>
+      <Footer></Footer>
     </>
+
   );
 };
 

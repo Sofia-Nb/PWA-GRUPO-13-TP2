@@ -4,25 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next"; 
 import Titulo from "../../components/Titulo/Titulo";
 import { LenguajeSelect } from "../../components/LenguajeSelect/LenguajeSelect";
+import Header from "../../components/Header/Header";
 
 const Favorites = () => {
     const navigation = useNavigate();
     const { t } = useTranslation();
   return (
     <>
-    <LenguajeSelect></LenguajeSelect>
-      <Titulo texto={t("favorites.title")} />
-      <button className= "font-bold py-2 px-4 rounded"
-        onClick={() => {
-          navigation(Routes.details);
-        }}> {t("favorites.detalles")}
-      </button>
+  <Header></Header>
 
-    <button className= "font-bold py-2 px-4 rounded"
-        onClick={() => {
-          navigation(Routes.home);
-        }}> {t("favorites.home")}
-    </button>
+      <Titulo texto={t("favorites.title")} />
+      
     </>
   );
 };

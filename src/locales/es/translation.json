@@ -3,19 +3,25 @@
     "english": "Inglés",
     "home": {
         "title": "Bienvenido al Home",
+
         "detalles": "DETALLES",
-        "favoritos": "FAVORITOS"
+        "favoritos": "FAVORITOS",
+        "no_more": "no hay mas :("
     },
-    "details":{
+    "details": {
         "title": "Bienvenido a Detalles",
         "home": "HOME",
         "favoritos": "FAVORITOS"
     },
-
-    "favorites":{
-        "title":"Bienvenido a tus Favoritos",
+    "favorites": {
+        "title": "Bienvenido a tus Favoritos",
         "home": "HOME",
-        "detalles":"DETALLES"
-
+        "detalles": "DETALLES"
+    },
+    "header": {
+        "title": "Type Tanks",
+        "home": "HOME",
+        "favoritos": "FAVORITOS",
+        "detalles": "DETALLES"
     }
 }
