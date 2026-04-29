@@ -6,7 +6,11 @@
 
         "detalles": "DETALLES",
         "favoritos": "FAVORITOS",
-        "no_more": "no hay mas :("
+        "no_more": "No hay mas resultados.",
+        "no_results": "No se encontraron tanques"
+    },
+    "common" : {
+        "loading": "Cargando..."
     },
     "details": {
         "title": "Bienvenido a Detalles",

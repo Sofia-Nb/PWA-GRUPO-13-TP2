@@ -10,6 +10,7 @@ import TankItemCard from "../../components/TankItemCard/TankItemCard";
 import { GetTanques } from "../../const/tanques";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import Busqueda from "../../components/Busqueda/Busqueda";
 
 export const Home = () => {
   const navigation = useNavigate();
@@ -19,6 +20,7 @@ export const Home = () => {
   const [loading, setLoading] = useState(false); 
   const [more, setMore] = useState(true);
   const divRef = useRef(null);
+  const [busqueda, setBusqueda] = useState("");
 
   useEffect(() => {
     const cargarTanques = async () => {
@@ -50,12 +52,47 @@ export const Home = () => {
     return () => observer.disconnect();
   }, [loading, more]); 
 
+  const tanquesFiltrados = tanques.filter((tanque) => {
+    const coincideNombre = tanque.nombre.toLowerCase().includes(busqueda.toLowerCase());
+    return coincideNombre;
+  })
+
   return (
     <>
       <Header></Header>
       
+      <button className="font-bold py-2 px-4 rounded"
+        onClick={() => {
+          navigation(Routes.favorites);
+        }}> {t("home.favoritos")}
+      </button>
+      
+      <button className="font-bold py-2 px-4 rounded"
+        onClick={() => {
+          navigation(Routes.details);
+        }}> {t("home.detalles")}
+      </button>
+
+      <Select
+        opciones={[
+          { label: "Opción 1", value: "opcion1" },
+          { label: "Opción 2", value: "opcion2" },
+          { label: "Opción 3", value: "opcion3" },
+        ]}
+        onChange={(e) => {
+          console.log("Seleccionaste:", e.target.value);
+        }}
+      />
+      
+      <Busqueda
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+        placeholder="Buscar tanque..."
+      />
+
       <div className="grid lg:grid-cols-3 gap-6 p-6">
-        {tanques.map(tanque => (
+        {tanquesFiltrados.length > 0 ? (
+        tanquesFiltrados.map((tanque) => (
           <Link key={tanque.idTanque} to={`/details/${tanque.idTanque}`}>
             <TankItemCard
               nombre={tanque.nombre}
@@ -64,7 +101,10 @@ export const Home = () => {
               imagen={tanque.imagen}
             />
           </Link>
-        ))}
+        ))
+        ) : (
+          <p className="text-center p-4 text-gray-400">{t("home.no_results") || "No se encontraron tanques"}</p>
+        )}
       </div>
 
       {loading && <p className="text-center p-4">{t("common.loading") || "Cargando..."}</p>}
