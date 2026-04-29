@@ -1,0 +1,28 @@
+.boton {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+/* variantes */
+.primario {
+  background: #007bff;
+  color: white;
+}
+
+.peligro {
+  background: #dc3545;
+  color: white;
+}
+
+.header {
+  background: transparent;
+  color: white;
+  border: 1px solid #475569;
+}
+
+.header:hover {
+  background: #1e293b;
+}

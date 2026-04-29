@@ -6,7 +6,7 @@ import Titulo from "../../components/Titulo/Titulo";
 import { LenguajeSelect } from "../../components/LenguajeSelect/LenguajeSelect"; // De main
 import { GetTanqueById } from "../../const/tanques";
 import { generarPDF } from "../../utils/generarPdf/generarPdf";
-
+import Header from "../../components/Header/Header";
 const Details = () => {
   const navigation = useNavigate();
   const { id } = useParams();
@@ -27,21 +27,10 @@ const Details = () => {
 
   return (
     <>
-      <LenguajeSelect /> 
+    <Header></Header>
       <Titulo texto={t("details.title")} />
       
-      <button className="font-bold py-2 px-4 rounded"
-        onClick={() => {
-          navigation(Routes.favorites);
-        }}> {t("details.favoritos")}
-      </button>
-      
-      <button className="font-bold py-2 px-4 rounded"
-        onClick={() => {
-          navigation(Routes.home);
-        }}> {t("details.home")}
-      </button>
-        
+     
       <div className="p-6 max-w-2xl mx-auto">
         <img src={tanque?.imagen} alt={tanque?.nombre} className="w-full h-64 object-cover rounded-xl mb-4"/>
         <h2 className="text-2xl font-bold mb-2">{tanque?.nombre}</h2>

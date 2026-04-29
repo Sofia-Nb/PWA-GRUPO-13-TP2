@@ -8,6 +8,8 @@ import Titulo from "../../components/Titulo/Titulo";
 import { LenguajeSelect } from "../../components/LenguajeSelect/LenguajeSelect";
 import TankItemCard from "../../components/TankItemCard/TankItemCard";
 import { GetTanques } from "../../const/tanques";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import Busqueda from "../../components/Busqueda/Busqueda";
 
 export const Home = () => {
@@ -57,8 +59,7 @@ export const Home = () => {
 
   return (
     <>
-      <LenguajeSelect />
-      <Titulo texto={t("home.title")} />
+      <Header></Header>
       
       <button className="font-bold py-2 px-4 rounded"
         onClick={() => {
@@ -110,7 +111,9 @@ export const Home = () => {
       {!more && <p className="text-center p-4 text-gray-400">{t("home.no_more") || "No hay más tanques"}</p>}
       
       <div ref={divRef} className="h-4"/>
+      <Footer></Footer>
     </>
+
   );
 };
 
