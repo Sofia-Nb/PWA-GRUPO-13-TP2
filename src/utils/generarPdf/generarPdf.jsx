@@ -5,8 +5,11 @@ export const generarPDF = (nombre, tipo, descripcion, imagen) => {
   const img = new Image();
 
   const pageWidth = doc.internal.pageSize.getWidth();
-  doc.setFillColor(140, 130, 240);
+  doc.setFillColor(15, 23, 42);
   doc.rect(0, 0, pageWidth, 30, "F");
+
+  doc.setFillColor(15, 23, 42);
+  doc.rect(0, 270, pageWidth, 30, "F");
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(18);
@@ -36,7 +39,7 @@ export const generarPDF = (nombre, tipo, descripcion, imagen) => {
     doc.text(texto, 20, 165);
 
     doc.setFontSize(10);
-    doc.setTextColor(150);
+    doc.setTextColor(225, 226, 229);
     doc.text(
       "Sastre Juan Ignacio-FAI-4491   Gonzalez Marcos Nahuel-FAI-4869   Bascur Sofia Natali-FAI-4306",
       pageWidth / 2,

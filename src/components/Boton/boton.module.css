@@ -17,6 +17,33 @@
   color: white;
 }
 
+.favorito {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #94a3b8; /* gris */
+  transition: all 0.3s ease;
+}
+
+.favorito:hover {
+  color: #f43f5e; 
+  transform: scale(1.2);
+}
+
+.favorito.activo {
+  color: #e11d48; 
+}
+.favorito.activo {
+  animation: latido 0.3s ease;
+}
+
+@keyframes latido {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
 .header {
   background: transparent;
   color: white;
