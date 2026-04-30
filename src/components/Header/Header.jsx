@@ -37,13 +37,6 @@ const Header = () => {
                         {t("header.favoritos")}
                     </Boton>
 
-                    <Boton
-                        variante="header"
-                        onClick={() => navigation(Routes.details)}
-                    >
-                        {t("header.detalles")}
-                    </Boton>
-
                     <LenguajeSelect />
 
                 </div>

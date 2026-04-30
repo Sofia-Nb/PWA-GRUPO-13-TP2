@@ -1,3 +1,5 @@
+import Boton from "../Boton/Boton";
+
 const TankItemCard = ({ nombre, tipo, descripcion, imagen }) => {
     return (
         <div className="rounded-lg shadow-md overflow-hidden bg-white">

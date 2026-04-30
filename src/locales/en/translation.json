@@ -3,7 +3,6 @@
   "english": "English",
   "home": {
     "title": "Welcome to Home",
-    "detalles": "DETAILS",
     "favoritos": "FAVORITES"
   },
   "details": {
@@ -13,8 +12,7 @@
   },
   "favorites": {
     "title": "Welcome to your Favorites",
-    "home": "HOME",
-    "detalles": "DETAILS"
+    "home": "HOME"
   },
   "header": {
     "title": "Tipo de Tanques"

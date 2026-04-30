@@ -3,8 +3,6 @@
     "english": "Inglés",
     "home": {
         "title": "Bienvenido al Home",
-
-        "detalles": "DETALLES",
         "favoritos": "FAVORITOS",
         "no_more": "No hay mas resultados.",
         "no_results": "No se encontraron tanques"
@@ -20,12 +18,11 @@
     "favorites": {
         "title": "Bienvenido a tus Favoritos",
         "home": "HOME",
-        "detalles": "DETALLES"
+        "no_results": "No se encontraron favoritos"
     },
     "header": {
         "title": "Type Tanks",
         "home": "HOME",
-        "favoritos": "FAVORITOS",
-        "detalles": "DETALLES"
+        "favoritos": "FAVORITOS"
     }
 }
