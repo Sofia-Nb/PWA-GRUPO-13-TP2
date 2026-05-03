@@ -8,6 +8,7 @@ import { GetTanqueById } from "../../const/tanques";
 import { generarPDF } from "../../utils/generarPdf/generarPdf";
 import Header from "../../components/Header/Header";
 import Boton from '../../components/Boton/Boton';
+import Footer from '../../components/Footer/Footer';
 
 const Details = () => {
   const navigation = useNavigate();
@@ -75,7 +76,7 @@ const Details = () => {
           /> 
           
         <Boton 
-        children ="Descargar PDF"
+        children ={t("details.boton")}
         onClick={() =>
           generarPDF(
             tanque?.nombre,
@@ -86,6 +87,7 @@ const Details = () => {
           variante= "primario"
           />
       </div>
+      <Footer></Footer>
     </>
   );
 };
