@@ -7,6 +7,7 @@ import Titulo from "../../components/Titulo/Titulo";
 import { LenguajeSelect } from "../../components/LenguajeSelect/LenguajeSelect";
 import Header from "../../components/Header/Header";
 import TankItemCard from '../../components/TankItemCard/TankItemCard';
+import Footer from '../../components/Footer/Footer';
 
 const Favorites = () => {
     const navigation = useNavigate();
@@ -34,6 +35,7 @@ const Favorites = () => {
           <p className="text-center p-4 text-gray-400">{t("favorites.no_results") || "No se encontraron favoritos"}</p>
         )}
       </div>
+      <Footer></Footer>
     </>
   );
 };

@@ -60,13 +60,13 @@ export const Home = () => {
   return (
     <>
       <Header></Header>
-      
+     <div className="flex justify-end p-4">
       <Busqueda
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
-        placeholder="Buscar tanque..."
+        placeholder={t("placeholder.search")}
       />
-
+</div>
       <div className="grid lg:grid-cols-3 gap-6 p-6">
         {tanquesFiltrados.length > 0 ? (
         tanquesFiltrados.map((tanque) => (

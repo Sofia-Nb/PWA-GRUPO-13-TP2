@@ -13,7 +13,8 @@
     "details": {
         "title": "Bienvenido a Detalles",
         "home": "HOME",
-        "favoritos": "FAVORITOS"
+        "favoritos": "FAVORITOS",
+        "boton":"Descargar pdf"
     },
     "favorites": {
         "title": "Bienvenido a tus Favoritos",
@@ -24,5 +25,9 @@
         "title": "Type Tanks",
         "home": "HOME",
         "favoritos": "FAVORITOS"
+    },
+    "placeholder": {
+        "search": "Buscar tanque..."
     }
+
 }
