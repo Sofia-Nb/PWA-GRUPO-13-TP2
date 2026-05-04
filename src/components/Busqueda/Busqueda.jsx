@@ -1,6 +1,5 @@
 const Busqueda = ({ value, onChange, placeholder }) => {
   return (
-    <div className="w-full mb-6">
       <input
         type="text"
         placeholder={placeholder || "Buscar tanque..."}
@@ -21,7 +20,6 @@ const Busqueda = ({ value, onChange, placeholder }) => {
           placeholder-gray-400
         "
       />
-    </div>
   );
 };
 
