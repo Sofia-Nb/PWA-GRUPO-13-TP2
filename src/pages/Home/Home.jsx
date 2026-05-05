@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Routes } from "../../const/routes";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next"; 
 import Select from "../../components/Select/Select";
 import Titulo from "../../components/Titulo/Titulo";
@@ -11,9 +10,9 @@ import { GetTanques } from "../../const/tanques";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Busqueda from "../../components/Busqueda/Busqueda";
+import Filtro from "../../components/Filtro/Filtro";
 
 export const Home = () => {
-  const navigation = useNavigate();
   const { t } = useTranslation();
   const [tanques, setTanques] = useState([]);
   const [page, setPage] = useState(1); 
@@ -21,6 +20,7 @@ export const Home = () => {
   const [more, setMore] = useState(true);
   const divRef = useRef(null);
   const [busqueda, setBusqueda] = useState("");
+  const [categoria, setCategoria] = useState("todos");
 
   useEffect(() => {
     const cargarTanques = async () => {
@@ -52,22 +52,36 @@ export const Home = () => {
     return () => observer.disconnect();
   }, [loading, more]); 
 
+  const categorias = [
+    {value: "todos", label: "Todos"},
+    ...([...new Set (tanques.map(tanque => tanque.tipo))].map(tipo => ({value: tipo, label: tipo})))
+  ]
+
   const tanquesFiltrados = tanques.filter((tanque) => {
     const coincideNombre = tanque.nombre.toLowerCase().includes(busqueda.toLowerCase());
-    return coincideNombre;
+    const coincideCategoria = categoria === "todos" || tanque.tipo === categoria;
+    return coincideNombre && coincideCategoria;
   })
 
   return (
     <>
       <Header></Header>
-     <div className="flex justify-end p-4">
-      <Busqueda
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-        placeholder={t("placeholder.search")}
+    <div className="flex justify-between items-center gap-4 px-6 py-4">
+      <Filtro
+          opciones={categorias}
+          value={categoria}
+          onChange={(e) => setCategoria(e.target.value)}
       />
-</div>
-      <div className="grid lg:grid-cols-3 gap-6 p-6">
+
+      <div className="w-1/2">
+        <Busqueda
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          placeholder={t("placeholder.search")}
+        />
+      </div>
+    </div>
+    <div className="grid lg:grid-cols-3 gap-6 p-6">
         {tanquesFiltrados.length > 0 ? (
         tanquesFiltrados.map((tanque) => (
           <Link key={tanque.idTanque} to={`/details/${tanque.idTanque}`}>
@@ -82,12 +96,10 @@ export const Home = () => {
         ) : (
           <p className="text-center p-4 text-gray-400">{t("home.no_results") || "No se encontraron tanques"}</p>
         )}
-      </div>
-
+    </div>
       {loading && <p className="text-center p-4">{t("common.loading") || "Cargando..."}</p>}
       {!more && <p className="text-center p-4 text-gray-400">{t("home.no_more") || "No hay más tanques"}</p>}
-      
-      <div ref={divRef} className="h-4"/>
+    <div ref={divRef} className="h-4"/>
       <Footer></Footer>
     </>
 

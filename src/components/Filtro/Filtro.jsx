@@ -1,18 +1,13 @@
 import React from 'react';
 import Select from '../Select/Select';
 
-
-
-const Filtro = ({opciones, onChange}) => {
+const Filtro = ({opciones, onChange, value}) => {
     return (
-        <div className="w-full mb-6">
-          <div className="flex justify-end">
-          <Select 
-            opciones={opciones}
-            onChange={onChange}
-          />
-          </div>
-        </div>
+    <Select 
+      opciones={opciones}
+      onChange={onChange}
+      value={value}
+    />
     );
 }
 export default Filtro;
