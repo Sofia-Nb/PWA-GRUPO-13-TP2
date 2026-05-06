@@ -14,9 +14,10 @@ const Favorites = () => {
     const { t } = useTranslation();
     const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
   return (
-    <>
+  <div className="min-h-screen flex flex-col">
   <Header></Header>
 
+     <main className="grow">
       <Titulo texto={t("favorites.title")} />
 
       <div className="grid lg:grid-cols-3 gap-6 p-6">
@@ -32,11 +33,14 @@ const Favorites = () => {
           </Link>
         )) 
       ) : (
-          <p className="text-center p-4 text-gray-400">{t("favorites.no_results") || "No se encontraron favoritos"}</p>
+          <p className="text-center p-4 text-gray-400">
+            {t("favorites.no_results") || "No se encontraron favoritos"}
+          </p>
         )}
       </div>
+      </main>
       <Footer></Footer>
-    </>
+    </div>
   );
 };
 
