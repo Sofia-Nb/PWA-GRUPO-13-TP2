@@ -27,7 +27,6 @@ const Favorites = () => {
   return (
     <>
       <Header />
-
       <div className="flex justify-between items-center gap-4 px-6 py-4">
         <Filtro
           opciones={categorias}
@@ -42,7 +41,6 @@ const Favorites = () => {
           />
         </div>
       </div>
-
       <div className="grid lg:grid-cols-3 gap-6 p-6">
         {favoritosFiltrados.length > 0 ? (
           favoritosFiltrados.map((favorito) => (
@@ -61,9 +59,8 @@ const Favorites = () => {
           </p>
         )}
       </div>
-      </main>
-      <Footer></Footer>
-    </div>
+      <Footer />
+    </>
   );
 };
 
