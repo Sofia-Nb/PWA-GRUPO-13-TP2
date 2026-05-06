@@ -3,18 +3,30 @@
   "english": "English",
   "home": {
     "title": "Welcome to Home",
-    "favoritos": "FAVORITES"
+    "favoritos": "FAVORITES",
+    "no_more": "No more results.",
+    "no_results": "No tanks found"
+  },
+  "common": {
+    "loading": "Loading..."
   },
   "details": {
     "title": "Welcome to Details",
     "home": "HOME",
-    "favoritos": "FAVORITES"
+    "favoritos": "FAVORITES",
+    "boton": "Download PDF"
   },
   "favorites": {
     "title": "Welcome to your Favorites",
-    "home": "HOME"
+    "home": "HOME",
+    "no_results": "No favorites found"
   },
   "header": {
-    "title": "Tipo de Tanques"
+    "title": "tipo de tanques",
+    "home": "HOME",
+    "favoritos": "FAVORITES"
+  },
+  "placeholder": {
+    "search": "Search tank..."
   }
 }
