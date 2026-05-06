@@ -1,7 +1,9 @@
 const Select = ({ opciones, onChange, value }) => {
   return (
+    <div className="relative w-35 max-w-xs">
     <select
-      className="text-sm px-2 py-1 border border-gray-600 rounded bg-slate-800 text-white focus:outline-none"
+      className="w-full text-sm px-3 py-2 pr-8 border border-gray-600 rounded-lg bg-slate-800 text-white 
+        focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer"
       onChange={onChange}
       value={value}
     >
@@ -11,6 +13,11 @@ const Select = ({ opciones, onChange, value }) => {
         </option>
       ))}
     </select>
+
+    <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-gray-400">
+        ▼
+      </span>
+    </div>
   );
 };
 

@@ -61,9 +61,9 @@ const Favorites = () => {
           </p>
         )}
       </div>
-
-      <Footer />
-    </>
+      </main>
+      <Footer></Footer>
+    </div>
   );
 };
 
