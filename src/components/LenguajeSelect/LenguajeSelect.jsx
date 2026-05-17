@@ -4,7 +4,7 @@ import Select from "../Select/Select";
 
 export const LenguajeSelect = () => {
   const { i18n, t } = useTranslation();
-  
+
 
   const changeLenguaje = (e) => {
     const newLang = e.target.value;
@@ -19,8 +19,10 @@ export const LenguajeSelect = () => {
 
   return (
     <div>
-      <Select opciones={opciones} onChange={changeLenguaje} 
-      value= {i18n.resolvedLanguage}/>
+      <Select opciones={opciones} onChange={changeLenguaje}
+        value={i18n.resolvedLanguage} />
     </div>
   );
 };
+
+export default LenguajeSelect;
