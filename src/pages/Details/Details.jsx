@@ -13,48 +13,55 @@ const Details = () => {
   const { t } = useTranslation();
   const [tanque, setTanque] = useState(null);
   const [error, setError] = useState(false);
-  const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+  const [favoritos, setFavoritos] = useState(
+  JSON.parse(localStorage.getItem("favoritos")) || []);
   const [botonActivo, setBotonActivo] = useState(false);
   const [nuevosFavoritos, setNuevosFavoritos] = useState(favoritos);
-  const existeItem = favoritos.some(fav => fav.id === id);
+  const existeItem = favoritos.some(fav => String(fav.id) === String(id));
 
   useEffect(() => {
-    const cargarTanque = async () => {
-      try {
-        const data = await GetTanqueById(id);
-        if (!data || !data.nombre) {
-          setError(true);
-        } else {
-          setTanque(data);
-        }
-      } catch (error) {
+  const cargarTanque = async () => {
+    try {
+      const data = await GetTanqueById(id);
+      if (!data?.data?.nombre) {
         setError(true);
-        console.error("Error al cargar el tanque:", error);
+      } else {
+        setTanque(data.data);
       }
-    };
-    cargarTanque();
-  }, [id]);
+    } catch (error) {
+      setError(true);
+      console.error("Error al cargar el tanque:", error);
+    }
+  };
+  cargarTanque();
+}, [id]);
+
+useEffect(() => {
+  localStorage.setItem("favoritos", JSON.stringify(favoritos));
+}, [favoritos]);
 
   const agregarFavoritos = () => {
     if (existeItem) {
       eliminarFavoritos();
       return;
     }
-    favoritos.push({
-      id: id,
-      nombre: tanque?.nombre,
-      tipo: tanque?.tipo,
-      descripcion: tanque?.descripcion,
-      imagen: tanque?.imagen
-    });
-    localStorage.setItem("favoritos", JSON.stringify(favoritos));
-  };
+    setFavoritos(prev => [
+  ...prev,
+  {
+    id,
+    nombre: tanque?.nombre,
+    tipo: tanque?.tipo,
+    descripcion: tanque?.descripcion,
+    imagen: tanque?.imagen
+  }
+]);
+};
 
   const eliminarFavoritos = () => {
-    const nuevosFavoritos = favoritos.filter(fav => fav.id !== id);
-    setNuevosFavoritos(nuevosFavoritos);
-    localStorage.setItem("favoritos", JSON.stringify(nuevosFavoritos));
-  };
+  setFavoritos(prev =>
+    prev.filter(fav => String(fav.id) !== String(id))
+  );
+};
   
   return (
   <>
@@ -85,6 +92,24 @@ const Details = () => {
           <Boton 
             children={t("details.boton")}
             onClick={() => generarPDF(tanque?.nombre, tanque?.tipo, tanque?.descripcion, tanque?.imagen)} 
+            variante="primario"
+          />
+
+          <Boton 
+            children={"Crear"}
+            onClick={() => {}} 
+            variante="primario"
+          />
+
+          <Boton 
+            children={"Editar"}
+            onClick={() => {}} 
+            variante="primario"
+          />
+
+          <Boton 
+            children={"Eliminar"}
+            onClick={() => {}} 
             variante="primario"
           />
         </div>
