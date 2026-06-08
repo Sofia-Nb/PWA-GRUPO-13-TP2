@@ -23,23 +23,28 @@ export const Home = () => {
   const [categoria, setCategoria] = useState("todos");
 
   useEffect(() => {
-    const cargarTanques = async () => {
-      setLoading(true);
-      try {
-        const data = await GetTanques(page, 3);
-        if (data.length === 0) {
-          setMore(false); 
-        } else {
-          setTanques(prev => [...prev, ...data]); 
-        }
-      } catch (error) {
-        console.error("Error al cargar tanques:", error);
-      } finally {
-        setLoading(false); 
+  const cargarTanques = async () => {
+    setLoading(true);
+
+    try {
+      const res = await GetTanques(page, 3);
+      const lista = res.data;
+
+      if (lista.length === 0) {
+        setMore(false);
+      } else {
+        setTanques(prev => [...prev, ...lista]);
       }
-    };
-    cargarTanques();
-  }, [page]); 
+
+    } catch (error) {
+      console.error("Error al cargar tanques:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  cargarTanques();
+}, [page]);
 
   useEffect(() => {
     if (!more) return;
@@ -84,7 +89,7 @@ export const Home = () => {
     <div className="grid lg:grid-cols-3 gap-6 p-6">
         {tanquesFiltrados.length > 0 ? (
         tanquesFiltrados.map((tanque) => (
-          <Link key={tanque.idTanque} to={`/details/${tanque.idTanque}`}>
+          <Link key={tanque.id} to={`/details/${tanque.id}`}>
             <TankItemCard
               nombre={tanque.nombre}
               tipo={tanque.tipo}
