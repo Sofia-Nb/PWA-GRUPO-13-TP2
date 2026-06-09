@@ -1,4 +1,4 @@
-const url = 'https://pwa-grupo-13-tp-2.vercel.app';
+const url = 'https://pwa-grupo-13-tp-express.vercel.app';
 
 export const GetTanques = async (page = 1, limit = 3) => {
   const res = await fetch(`${url}/tanques?page=${page}&limit=${limit}`);
