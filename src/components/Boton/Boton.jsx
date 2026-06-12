@@ -1,7 +1,7 @@
 import styles from "./boton.module.css";
 import React from "react";
 
-const Boton = ({ children, onClick, variante, style }) => {
+const Boton = ({ children, onClick, variante, style, disabled }) => {
   return (
     <button
       onClick={onClick}
@@ -11,8 +11,11 @@ const Boton = ({ children, onClick, variante, style }) => {
         variante === "primario" && styles.primario,
         variante === "header" && styles.header,
         variante === "favorito" && styles.favorito,
+        variante === "editar" && styles.editar,
+        variante === "crear" && styles.crear,
       ].filter(Boolean).join(" ")}
       style={style}
+      disabled={disabled}
     >
       {children}
     </button>

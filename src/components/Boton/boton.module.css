@@ -4,12 +4,28 @@
   font-size: 14px;
   border: 1px solid #ccc;
   background: white;
+  cursor: pointer;
 }
 
 /* variantes */
 .primario {
   background: #007bff;
   color: white;
+}
+
+.editar {
+  background: #4cb853;
+  color: white;
+}
+
+.crear {
+  background: #022954;
+  color: white;
+  border: 1px solid #475569;
+}
+
+.crear:hover {
+  background: #1e293b;
 }
 
 .peligro {

@@ -69,21 +69,24 @@ export const Home = () => {
   })
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Header></Header>
-    <div className="flex justify-between items-center gap-4 px-6 py-4">
+      <main className="flex-1">
+    <div className="bg-white rounded-xl shadow-sm p-4 mx-6 mt-4">
+      <div className="flex flex-col md:flex-row gap-4 items-center">
       <Filtro
           opciones={categorias}
           value={categoria}
           onChange={(e) => setCategoria(e.target.value)}
       />
 
-      <div className="w-1/2">
+      <div className="flex-1">
         <Busqueda
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           placeholder={t("placeholder.search")}
         />
+      </div>
       </div>
     </div>
     <div className="grid lg:grid-cols-3 gap-6 p-6">
@@ -105,8 +108,9 @@ export const Home = () => {
       {loading && <p className="text-center p-4">{t("common.loading") || "Cargando..."}</p>}
       {!more && <p className="text-center p-4 text-gray-400">{t("home.no_more") || "No hay más tanques"}</p>}
     <div ref={divRef} className="h-4"/>
+    </main>
       <Footer></Footer>
-    </>
+    </div>
 
   );
 };

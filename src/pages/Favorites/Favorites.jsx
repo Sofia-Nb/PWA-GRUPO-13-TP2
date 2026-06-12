@@ -25,8 +25,9 @@ const Favorites = () => {
     });
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Header />
+      <main className="flex-1">
       <div className="flex justify-between items-center gap-4 px-6 py-4">
         <Filtro
           opciones={categorias}
@@ -54,13 +55,14 @@ const Favorites = () => {
             </Link>
           )) 
         ) : (
-          <p className="text-center p-4 text-gray-400">
-            {t("favorites.no_results") || "No se encontraron favoritos"}
-          </p>
+        <div className="flex justify-center">
+          <p className="p-4 text-gray-400">{t("favorites.no_results")}</p>
+          </div>
         )}
       </div>
+      </main>
       <Footer />
-    </>
+    </div>
   );
 };
 
