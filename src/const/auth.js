@@ -45,6 +45,21 @@ export const registerUser = async (nombre, email, password) => {
     return data;
 };
 
+export const logoutUser = async () => {
+    const res = await fetch(`${url}/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        throw new Error(data.message);
+    }
+
+    return data;
+};
+
 
 
 

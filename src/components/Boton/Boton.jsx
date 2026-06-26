@@ -13,6 +13,7 @@ const Boton = ({ children, onClick, variante, style, disabled }) => {
         variante === "favorito" && styles.favorito,
         variante === "editar" && styles.editar,
         variante === "crear" && styles.crear,
+        variante === "logOut" && styles.logOut,
       ].filter(Boolean).join(" ")}
       style={style}
       disabled={disabled}
