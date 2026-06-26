@@ -14,6 +14,8 @@ import Modal from "../../components/Modal/Modal";
 const Details = () => {
   const { id } = useParams();
   const { t } = useTranslation();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const esAdmin = user?.rol === "admin";
   const [tanque, setTanque] = useState(null);
   const [error, setError] = useState(false);
   const [favoritos, setFavoritos] = useState(
@@ -176,6 +178,8 @@ const abrirModal = () => {
             variante="primario"
           />
 
+         {esAdmin && (
+            <>
           <Boton
           children="Editar"
           onClick={abrirModal}
@@ -192,6 +196,9 @@ const abrirModal = () => {
             onClick={() => {eliminarTanque()}} 
             variante="peligro"
           />
+          </>
+          )}
+
         </div>
       </>
     )}

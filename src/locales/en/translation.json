@@ -24,7 +24,8 @@
   "header": {
     "title": "Type Tanks",
     "home": "HOME",
-    "favoritos": "FAVORITES"
+    "favoritos": "FAVORITES",
+    "login": "LOGIN"
   },
   "placeholder": {
     "search": "Search tank..."

@@ -11,6 +11,8 @@ import Swal from "sweetalert2";
 const Header = () => {
     const navigation = useNavigate();
     const { t } = useTranslation();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const esAdmin = user?.rol === "admin";
     const [menuAbierto, setMenuAbierto] = useState(false);
     const [mostrarModal, setMostrarModal] = useState(false);
     const [formData, setFormData] = useState({nombre: "", tipo: "", descripcion: "", imagen: ""});
@@ -85,10 +87,14 @@ const Header = () => {
                 <div className={`absolute md:static top-full left-0 w-full md:w-auto bg-slate-900 md:flex items-center gap-3 
                     ${menuAbierto ? "flex flex-col p-4" : "hidden"}`}>
 
+                    {esAdmin && (
+                    <>
                     <Boton
                     children="CREAR"
                     onClick={abrirModal}
                     variante="crear"/>
+                    </>
+                    )}
 
                     <Modal
                     mostrarModal={mostrarModal}
@@ -109,6 +115,13 @@ const Header = () => {
                         onClick={() => navigation(Routes.favorites)}
                     >
                         {t("header.favoritos")}
+                    </Boton>
+
+                    <Boton
+                        variante="header"
+                        onClick={() => navigation(Routes.login)}
+                    >
+                        {t("header.login")}
                     </Boton>
 
                     <LenguajeSelect />

@@ -24,7 +24,8 @@
     "header": {
         "title": "Tipo de Tanques",
         "home": "HOME",
-        "favoritos": "FAVORITOS"
+        "favoritos": "FAVORITOS",
+        "login": "LOGIN"
     },
     "placeholder": {
         "search": "Buscar tanque..."
