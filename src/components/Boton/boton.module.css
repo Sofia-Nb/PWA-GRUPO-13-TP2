@@ -28,6 +28,16 @@
   background: #1e293b;
 }
 
+.logOut {
+  background: #6f0404;
+  color: white;
+  border: 1px solid #475569;
+}
+
+.logOut:hover {
+  background: #3b1e1e;
+}
+
 .peligro {
   background: #dc3545;
   color: white;

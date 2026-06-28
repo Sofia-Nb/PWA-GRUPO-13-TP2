@@ -11,8 +11,10 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Busqueda from "../../components/Busqueda/Busqueda";
 import Filtro from "../../components/Filtro/Filtro";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [tanques, setTanques] = useState([]);
   const [page, setPage] = useState(1); 
@@ -21,6 +23,13 @@ export const Home = () => {
   const divRef = useRef(null);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("todos");
+
+  useEffect(() => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user || user.rol === "") {
+    navigate("/login");
+  }
+}, [navigate]);
 
   useEffect(() => {
   const cargarTanques = async () => {

@@ -25,7 +25,8 @@
     "title": "Type Tanks",
     "home": "HOME",
     "favoritos": "FAVORITES",
-    "login": "LOGIN"
+    "login": "LOGIN",
+    "logOut": "LOGOUT"
   },
   "placeholder": {
     "search": "Search tank..."

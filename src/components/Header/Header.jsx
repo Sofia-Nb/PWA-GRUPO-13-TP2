@@ -7,6 +7,7 @@ import Boton from "../Boton/Boton";
 import { LenguajeSelect } from "../LenguajeSelect/LenguajeSelect";
 import Modal from "../Modal/Modal";
 import Swal from "sweetalert2";
+import { logoutUser } from "../../const/auth";
 
 const Header = () => {
     const navigation = useNavigate();
@@ -27,6 +28,29 @@ const Header = () => {
     });
     setMostrarModal(true);
     };
+
+    const cerrarSesion = async () => {
+        const result = await Swal.fire({
+        title: "¿Cerrar sesión?",
+        text: "Tendrás que volver a iniciar sesión.",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Sí, cerrar sesión",
+        cancelButtonText: "Cancelar",
+    });
+
+    if (!result.isConfirmed) return;
+    try {
+        await logoutUser();
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        navigation(Routes.login);
+    } catch (error) {
+        console.error(error);
+    }
+};
 
     const crearTanque = async () => {
     if (!formData.nombre.trim()) {
@@ -75,9 +99,13 @@ const Header = () => {
         <header className="sticky top-0 z-50 bg-slate-900 text-white shadow-md">
             <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
                 <h1 className="text-lg font-bold">
+                    {user ? (
                     <Link to={Routes.home} className="hover:text-gray-300 transition">
                         {t("header.title")}
                     </Link>
+                    ) : (
+                        t("header.title")
+                    )}
                 </h1>
                 <button
                 className="md:hidden text-2xl"
@@ -104,18 +132,31 @@ const Header = () => {
                     onSubmit={crearTanque}
                     modo="crear"
                     loading={loading}/>
+                    
 
-                    <Boton variante="header"
-                        onClick={() => navigation(Routes.home)}  >
+                    {user && (
+                    <>
+                    <Boton
+                        variante="logOut"
+                        onClick={cerrarSesion}
+                    >
+                        {t("header.logOut")}
+                    </Boton>
+
+                    <Boton
+                    variante="header"
+                    onClick={() => navigation(Routes.home)}
+                    >
                             {t("header.home")}
-                            
-                        </Boton>
+                    </Boton>
                     <Boton
                         variante="header"
                         onClick={() => navigation(Routes.favorites)}
                     >
                         {t("header.favoritos")}
                     </Boton>
+                    </>
+                    )}
 
                     <Boton
                         variante="header"
