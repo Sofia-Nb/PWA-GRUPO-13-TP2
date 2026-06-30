@@ -10,6 +10,7 @@ import Footer from '../../components/Footer/Footer';
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Modal from "../../components/Modal/Modal";
+import { addFavorite, removeFavorite, getFavorites } from "../../const/favoritos";
 
 const Details = () => {
   const { id } = useParams();
@@ -18,12 +19,24 @@ const Details = () => {
   const esAdmin = user?.rol === "admin";
   const [tanque, setTanque] = useState(null);
   const [error, setError] = useState(false);
-  const [favoritos, setFavoritos] = useState(
-  JSON.parse(localStorage.getItem("favoritos")) || []);
+  const [favoritos, setFavoritos] = useState([]);
   const existeItem = favoritos.some(fav => String(fav.id) === String(id));
   const navigate = useNavigate();
   const [mostrarModal, setMostrarModal] = useState(false);
   const [formData, setFormData] = useState({nombre: "", tipo: "", descripcion: "", imagen: ""});
+
+  useEffect(() => {
+  const cargarFavoritos = async () => {
+    try {
+      const data = await getFavorites();
+      setFavoritos(data);
+    } catch (error) {
+      console.error("Error al cargar favoritos:", error);
+    }
+  };
+
+  cargarFavoritos();
+}, []);
 
   useEffect(() => {
   const cargarTanque = async () => {
@@ -42,31 +55,31 @@ const Details = () => {
   cargarTanque();
 }, [id]);
 
-useEffect(() => {
-  localStorage.setItem("favoritos", JSON.stringify(favoritos));
-}, [favoritos]);
-
-const agregarFavoritos = () => {
+const agregarFavoritos = async () => {
+  try {
     if (existeItem) {
-      eliminarFavoritos();
+      await eliminarFavoritos();
       return;
     }
+    await addFavorite(id);
     setFavoritos(prev => [
-  ...prev,
-  {
-    id,
-    nombre: tanque?.nombre,
-    tipo: tanque?.tipo,
-    descripcion: tanque?.descripcion,
-    imagen: tanque?.imagen
+      ...prev,
+      tanque
+    ]);
+  } catch (error) {
+    console.error(error);
   }
-]);
 };
 
-const eliminarFavoritos = () => {
-  setFavoritos(prev =>
-    prev.filter(fav => String(fav.id) !== String(id))
-  );
+const eliminarFavoritos = async () => {
+  try {
+    await removeFavorite(id);
+    setFavoritos(prev =>
+      prev.filter(fav => String(fav.id) !== String(id))
+    );
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const eliminarTanque = async () => {
@@ -166,9 +179,7 @@ const abrirModal = () => {
           <br/>
           <Boton
             children="❤"
-            onClick={() => {
-              agregarFavoritos();
-            }}
+            onClick={agregarFavoritos}
             variante="favorito"
             style={{ color: existeItem ? "#e11d48" : "#94a3b8" }}
           /> 

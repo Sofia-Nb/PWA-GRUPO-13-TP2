@@ -45,6 +45,7 @@ const Header = () => {
 
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        localStorage.removeItem("favoritos");
 
         navigation(Routes.login);
     } catch (error) {

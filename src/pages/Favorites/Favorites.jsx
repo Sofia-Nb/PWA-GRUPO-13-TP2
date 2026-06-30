@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next"; 
 import Header from "../../components/Header/Header";
@@ -6,17 +6,31 @@ import TankItemCard from '../../components/TankItemCard/TankItemCard';
 import Footer from '../../components/Footer/Footer';
 import Busqueda from '../../components/Busqueda/Busqueda';
 import Filtro from '../../components/Filtro/Filtro';
+import { getFavorites } from "../../const/favoritos";
 
 const Favorites = () => {
     const { t } = useTranslation();
-    const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
     const [busqueda, setBusqueda] = useState("");
     const [categoria, setCategoria] = useState("todos");
+    const [favoritos, setFavoritos] = useState([]);
 
     const categorias = [
       { value: "todos", label: "Todos" },
       ...([...new Set(favoritos.map(f => f.tipo))].map(tipo => ({ value: tipo, label: tipo })))
     ];
+
+    useEffect(() => {
+      const cargarFavoritos = async () => {
+        try {
+          const data = await getFavorites();
+          console.log("Favoritos recibidos:", data);
+          setFavoritos(data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      cargarFavoritos();
+    }, []);
 
     const favoritosFiltrados = favoritos.filter((favorito) => {
       const coincideNombre = favorito.nombre.toLowerCase().includes(busqueda.toLowerCase());

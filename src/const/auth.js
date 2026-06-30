@@ -1,6 +1,7 @@
 const url = 'https://pwa-grupo-13-tp-express.vercel.app';
 
 export const loginUser = async (email, password) => {
+    
     const res = await fetch(`${url}/auth/login`, {
         method: "POST",
         headers: {
@@ -46,9 +47,13 @@ export const registerUser = async (nombre, email, password) => {
 };
 
 export const logoutUser = async () => {
+    const token = localStorage.getItem("token");
     const res = await fetch(`${url}/auth/logout`, {
         method: "POST",
         credentials: "include",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
     });
 
     const data = await res.json();
